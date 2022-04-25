@@ -38,3 +38,7 @@ export const expectEvents = () => ({
   type: "SET_SHOW_EVENTS",
   payload: "pending",
 });
+export const setSearchData = payload => ({
+  type: 'SET_SEARCH_DATA',
+  payload
+});

@@ -15,7 +15,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchEvents('&size=50'));
+    dispatch(fetchEvents('&size=50', 'search'));
     // eslint-disable-next-line
   }, []);
 

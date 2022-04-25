@@ -19,7 +19,7 @@ const SearchForm = ({ startTransition }) => {
   const inputValue = useSelector((state) => state.search.inputValue);
   const startDate = useSelector((state) => state.date.startDate);
   const endDate = useSelector((state) => state.date.endDate);
-  const events = useSelector((state) => state.search.events);
+  const events = useSelector((state) => state.search.searchData);
   let searchData = events.map((event) => event?._embedded.venues[0].city.name);
   searchData = [...new Set(searchData)].sort();
   const error = useSelector((state) => state.error.error);
