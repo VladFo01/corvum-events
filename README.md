@@ -1,6 +1,8 @@
 # Test task for Corvum company
 
-This is app uses https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
+You can see it here: https://corvum-events.netlify.app/
+
+This app uses https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
 
 ## Getting started
 
