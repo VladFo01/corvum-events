@@ -27,7 +27,7 @@ const Cards = () => {
           />
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography variant="body2" component="span">
-              {`Address: ${event?._embedded.venues[0].address.line1}`}
+              {`Time: ${event?.dates.start.localDate}, ${event?.dates.start.localTime}`}
             </Typography>
           </CardContent>
           <CardActions>

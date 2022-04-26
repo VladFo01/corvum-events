@@ -8,7 +8,8 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearValue, updateValue } from "../../store/actions";
+import moment from "moment";
+import { catchError, clearValue, removeError, updateValue } from "../../store/actions";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -40,11 +41,21 @@ const SearchForm = ({ startTransition }) => {
   function onSubmitHandler(event) {
     event.preventDefault();
 
+    if (!inputValue) {
+      dispatch(catchError("The city name is empty! Type something before the submit"));
+      return;
+    }
+
+    function formatDate(date) {
+      return moment(date).format().split('+')[0]+'Z';
+    }
+
     dispatch(clearValue());
+    dispatch(removeError());
     startTransition(() => {
       dispatch(
         fetchEvents(
-          `&startDateTime=${startDate}&endDateTime=${endDate}&city=${inputValue}`
+          `&startDateTime=${formatDate(startDate)}&endDateTime=${formatDate(endDate)}&city=${inputValue}`
         )
       );
     });
@@ -79,7 +90,7 @@ const SearchForm = ({ startTransition }) => {
             <Grid item md={4} xs={10}>
               <DesktopDatePicker
                 label="Start date"
-                inputFormat="MM/dd/yyyy"
+                inputFormat="dd/MM/yyyy"
                 value={startDate}
                 onChange={onDataChangeHandler.bind(null, updateStartDate)}
                 renderInput={(params) => <TextField {...params} />}
@@ -88,7 +99,7 @@ const SearchForm = ({ startTransition }) => {
             <Grid item md={4} xs={10}>
               <DesktopDatePicker
                 label="End date"
-                inputFormat="MM/dd/yyyy"
+                inputFormat="dd/MM/yyyy"
                 value={endDate}
                 onChange={onDataChangeHandler.bind(null, updateEndDate)}
                 renderInput={(params) => <TextField {...params} />}

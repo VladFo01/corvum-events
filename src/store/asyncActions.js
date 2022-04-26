@@ -13,6 +13,12 @@ export const fetchEvents = (queries = '', type = 'show') => {
           dispatch(setEvents(data._embedded.events));
         }
       })
-      .catch((e) => dispatch(catchError(e.message)));
+      .catch((e) => {
+        if (e.message.includes("undefined")) {
+          dispatch(catchError("Sorry, there is no event for this request data("));
+          return;
+        }
+        dispatch(catchError(e.message))
+      });
   };
 };
